@@ -1,0 +1,19 @@
+<p>chat works!</p>
+<h1>user: {{user}}</h1>
+<ul>
+  <li class="text" *ngFor="let message of messages | async">
+      {{message.text}}
+  </li>
+</ul>
+
+<form [formGroup]="messageForm" (ngSubmit)="sendMessage(messageForm.value)">
+  <div>
+    <label for="text">
+      Text
+    </label>
+    <input id="text" type="text" formControlName="text">
+  </div>
+  <button class="button" type="submit">Send</button>
+</form>
+
+<button (click)="logOut()">log out</button>

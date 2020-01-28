@@ -1,0 +1,13 @@
+<p>register works!</p>
+<div class="container" id="container">
+	<div class="form-container sign-in-container">
+		<form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
+			<h1>Register</h1>
+      <input type="text" placeholder="Email" formControlName="email"/>
+      <input type="text" placeholder="Username" formControlName="username"/>
+			<input type="password" placeholder="Password" formControlName="password"/>
+      <button type="submit" class="button-effect">Log In</button>
+      <p style="color: red;">{{ logInError }}</p>
+    </form>
+  </div>
+</div>
