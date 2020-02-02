@@ -10,24 +10,35 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatComponent } from './main/chat/chat.component';
 import { LoginComponent } from './main/login/login.component';
 import { RegisterComponent } from './main/register/register.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
+import { ErrorComponent } from './main/error/error.component';
+import { AuthGuard } from './shared/auth.guard';
+import { AuthenticationService } from './shared/services/authentication.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AppRoutingModule,
+    AngularFireAuthGuardModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AuthenticationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

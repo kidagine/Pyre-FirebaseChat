@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
 import { FormGroup, FormControl } from '@angular/forms';
 import { User } from 'src/app/shared/models/user.model';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
@@ -24,6 +22,10 @@ export class LoginComponent implements OnInit {
 
   login(user: User) {
     this.authenticationService.login(user);
+  }
+
+  resetPassword(user: User){
+    this.authenticationService.resetPassword(user.email);
   }
 
 }

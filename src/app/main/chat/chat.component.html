@@ -1,19 +1,40 @@
-<p>chat works!</p>
-<h1>user: {{user}}</h1>
-<ul>
-  <li class="text" *ngFor="let message of messages | async">
-      {{message.text}}
-  </li>
-</ul>
-
-<form [formGroup]="messageForm" (ngSubmit)="sendMessage(messageForm.value)">
-  <div>
-    <label for="text">
-      Text
-    </label>
-    <input id="text" type="text" formControlName="text">
+<div class="top-bar"></div>
+<div class="row">
+  <div class="background-column">
+    <div class="user-container">
+      <div class="user-wrapper">
+        <img src="https://images-ext-2.discordapp.net/external/mUrQwUjsG-3yt4moMCQShQRn4XFWXVRN0eoXSjgAIEw/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/150293497528844289/8c2553469292d097de6bc82a88d2e394.png?width=468&height=468" width="48" height="48">
+        <span style="display: inline-block; width: 120px;">
+          <label>{{user}}</label>
+        </span>
+        <button (click)="logOut()">Log Out</button>
+    </div>
   </div>
-  <button class="button" type="submit">Send</button>
-</form>
+</div>
 
-<button (click)="logOut()">log out</button>
+  <div class="chat-column">
+    <ul class="chat-list" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+      <li class="text" *ngFor="let message of messages | async" >
+        <br>
+        <p><span class="username">{{message.username}}</span> <span class="post-time"> {{timeConverter(message.postTime)}}</span> <br> {{message.text}}</p>
+        <br>
+      </li>
+    </ul>    
+    <form [formGroup]="messageForm" (ngSubmit)="sendMessage(messageForm.value)">
+      <div>
+        <input class="text-message" placeholder="Message" formControlName="text">
+      </div>
+    </form>
+  </div>
+
+  <div class="users-column">
+    <h5 style="color: #8e9297">USERS— {{getUsersAmount()}}</h5>
+    <ul class="chat-list">
+      <li class="text" *ngFor="let user of users | async">
+        <br>
+        <p><span>{{user.username}}</span> 
+        <br>
+      </li>
+    </ul>    
+  </div>
+</div>

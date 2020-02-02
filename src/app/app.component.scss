@@ -1,0 +1,15 @@
+.background-container{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -100;
+}
+.background{
+  background-image: url("https://i.ibb.co/BCdDrrS/this.png");
+  min-height: 940px; 
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -100;
+}

@@ -1,13 +1,17 @@
-<p>register works!</p>
-<div class="container" id="container">
-	<div class="form-container sign-in-container">
+<div class="container">
+  <div class="form-container">
 		<form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
-			<h1>Register</h1>
-      <input type="text" placeholder="Email" formControlName="email"/>
-      <input type="text" placeholder="Username" formControlName="username"/>
-			<input type="password" placeholder="Password" formControlName="password"/>
-      <button type="submit" class="button-effect">Log In</button>
+      <h1>Create an account</h1>
+      <label>Email</label>
+      <input type="email" formControlName="email"/>
+      <label>Username</label>
+      <input type="text" formControlName="username"/>
+      <label>Password</label>
+      <input type="password" formControlName="password"/>
+      <span class="terms-container">Read and agree to Pyre's <a href="https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"  target="_blank">Terms of Service</a> and <a href="https://i.redd.it/b2mdccvreny31.jpg"  target="_blank">Privacy Policy.</a></span>
+      <button type="submit" class="login-button">Continue</button>
+      <a routerLink="/login">Already have an account?</a>
       <p style="color: red;">{{ logInError }}</p>
     </form>
   </div>
-</div>
+</div>  

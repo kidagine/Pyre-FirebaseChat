@@ -1,11 +1,16 @@
-<div class="container" id="container">
-	<div class="form-container sign-in-container">
-		<form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
-			<h1>Log in</h1>
-			<input type="email" placeholder="Email" formControlName="email"/>
-			<input type="password" placeholder="Password" formControlName="password"/>
-      <button type="submit" class="button-effect">Log In</button>
+<div class="container">
+  <div class="form-container">
+    <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" autocomplete="on">
+      <h1>Welcome back!</h1>
+      <h2>Proceed to login to your account!</h2>
+      <label>Email</label>
+      <input type="email" name="email" autocomplete="username" formControlName="email"/>
+      <label>Password</label>
+      <input type="password" autocomplete="current-password"  formControlName="password"/>
+      <a (click)="resetPassword(loginForm.value)">Forgot your password?</a>
+      <button type="submit" class="login-button">Login</button>
+      <span>Need an account? <a routerLink="/register">Register</a></span>
       <p style="color: red;">{{ logInError }}</p>
     </form>
   </div>
-</div>
+</div>  
