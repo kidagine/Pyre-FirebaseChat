@@ -17,10 +17,12 @@ export class ChatComponent implements OnInit {
   private userCollection: AngularFirestoreCollection<User>;
   messages: Observable<Message[]>;
   users: Observable<User[]>;
-  user: string;
-  checkoutForm;
+  user: User;
   message: Message;
   userAmount: String;
+  previousUsername: String;
+  previousPostTime: Date;
+  usernameColor:String = "white";
 
   messageForm = new FormGroup({
     text: new FormControl('')
@@ -32,14 +34,22 @@ export class ChatComponent implements OnInit {
     this.userCollection = afs.collection<User>('users');
     this.users = this.afs.collection<User>('users', ref => ref.orderBy('username','asc')).valueChanges();
     this.getUsersAmount();
+
+    this.userCollection.doc(this.authenticationService.getUserId()).ref.get().then((doc) => {
+      if (doc.exists) {
+        this.user = <User>doc.data();
+      }
+      else{
+        console.log("username doesn't exist");
+      }
+    })
   }
   ngOnInit() {
-    this.user = this.authenticationService.getUser();
   }
 
   sendMessage(message: Message){
     this.messageForm.reset();
-    message.username = this.user;
+    message.username = this.user.username;
     var today = new Date();
     message.postTime = today;
     this.messageCollection.add(message);
@@ -64,6 +74,19 @@ export class ChatComponent implements OnInit {
 
   logOut(){
     this.authenticationService.logOut();
+  }
+
+  isPreviousUsernameEqual(currentUsername: String, setPrevious?: boolean){
+    if (this.previousUsername === currentUsername){
+      if (setPrevious){
+        this.previousUsername = currentUsername;
+      }
+      return true;
+    }
+    if (setPrevious){
+      this.previousUsername = currentUsername;
+    }
+    return false
   }
 
 }

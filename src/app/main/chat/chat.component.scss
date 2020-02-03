@@ -38,6 +38,12 @@
   padding-top: 8%;
   padding-bottom: 8%;
 } 
+.username-container{
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  width: 120px;
+}
 .user-container img{
   margin-left: 5%;
   border-radius: 50%;
@@ -61,7 +67,6 @@
   cursor: pointer;
   background-color: #e04444;
   border: none;
-  font-size: 16px;
   padding: 2% 2% 2% 2%;
   color: #fff;
 }
@@ -82,6 +87,9 @@
 	margin: 8px 0;
   width: 100%;
   font-size: 14px;
+  border-radius: 3px;
+}
+.text-message:hover{
   border-radius: 3px;
 }
 .chat-list{
@@ -109,18 +117,24 @@
 
 .chat-list .username{
   color:#fff;
-  font-size: 15px;
+  font-size: 16px;
+  // vertical-align: top;
 }
 .chat-list .post-time{
   color:#727673;
   font-size: 12px;
+  // vertical-align: top;
 }
 .chat-list p{
   color:#d5d8dc;
   font-size: 15px;
 }
-.chat-list img{
+.user-image{
   margin-left: 5%;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+.chat-list img{
   border-radius: 50%;
   vertical-align: middle;
 }
@@ -136,4 +150,10 @@
 .users-column span{
   font-size: 17px;
   color: #fff;
+}
+.userlist-container{
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  width: 205px;
 }

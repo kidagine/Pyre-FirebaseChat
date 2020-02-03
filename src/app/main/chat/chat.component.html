@@ -3,9 +3,9 @@
   <div class="background-column">
     <div class="user-container">
       <div class="user-wrapper">
-        <img src="https://images-ext-2.discordapp.net/external/mUrQwUjsG-3yt4moMCQShQRn4XFWXVRN0eoXSjgAIEw/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/150293497528844289/8c2553469292d097de6bc82a88d2e394.png?width=468&height=468" width="48" height="48">
-        <span style="display: inline-block; width: 120px;">
-          <label>{{user}}</label>
+        <img class="user-image"src="https://ih1.redbubble.net/image.539340996.7218/flat,550x550,075,f.jpg" width="48" height="48">
+        <span class="username-container">
+          <label>{{user.username}}</label>
         </span>
         <button (click)="logOut()">Log Out</button>
     </div>
@@ -15,9 +15,19 @@
   <div class="chat-column">
     <ul class="chat-list" #scrollMe [scrollTop]="scrollMe.scrollHeight">
       <li class="text" *ngFor="let message of messages | async" >
-        <br>
-        <p><span class="username">{{message.username}}</span> <span class="post-time"> {{timeConverter(message.postTime)}}</span> <br> {{message.text}}</p>
-        <br>
+        <p style="line-height:25px;"> 
+          <span *ngIf="!isPreviousUsernameEqual(message.username, false)"> 
+            <br>           
+            <img src="https://ih1.redbubble.net/image.539340996.7218/flat,550x550,075,f.jpg" width="42" height="42">
+            <div style="display: inline-block;overflow: hidden; width: 8px;"></div>
+            <span class="username" [ngStyle]="{'color': user.usernameColor}">{{message.username}}</span>
+            <span class="post-time"> {{timeConverter(message.postTime)}} </span> 
+            <br><div style="display: inline-block;overflow: hidden; width: 50px;"></div>{{message.text}}
+          </span>
+          <span *ngIf="isPreviousUsernameEqual(message.username, true)"> 
+            <div style="display: inline-block;overflow: hidden; width: 50px;"></div>{{message.text}}
+          </span>
+        </p>
       </li>
     </ul>    
     <form [formGroup]="messageForm" (ngSubmit)="sendMessage(messageForm.value)">
@@ -32,9 +42,18 @@
     <ul class="chat-list">
       <li class="text" *ngFor="let user of users | async">
         <br>
-        <p><span>{{user.username}}</span> 
+        <p>        
+          <img src="https://ih1.redbubble.net/image.539340996.7218/flat,550x550,075,f.jpg" width="32" height="32">
+          <span class="userlist-container">
+            <span style="margin-left: 5%;" [ngStyle]="{'color': user.usernameColor}">{{user.username}}</span> 
+          </span>
         <br>
       </li>
     </ul>    
+    <h5 style="color: #8e9297">OFFLINE— 0</h5>
   </div>
 </div>
+
+<span *ngIf="!user">
+  <div class="loading-ring"></div>
+</span>

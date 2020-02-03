@@ -17,20 +17,16 @@ export class AuthenticationService {
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFirestore, private router: Router) { }
 
-  getUser(): string {
-    return this.afAuth.auth.currentUser.displayName;
+  getUserId(): string {
+    return this.afAuth.auth.currentUser.uid;
   }
 
-  isUserLoggedIn() {
-    this.afAuth.auth.onAuthStateChanged(function(user) {
-      if (user){
-        console.log('a');
-        return true;
-      }
-      console.log('b');
-      return false;
-    })
-    console.log('s');
+  isUserLoggedIn(): boolean {
+    var user = this.afAuth.auth.currentUser;
+    if (user){
+      return true;
+    }
+    return false;
   }
   
   login(user: User) {
@@ -50,10 +46,10 @@ export class AuthenticationService {
     this.afAuth.auth.createUserWithEmailAndPassword( user.email, user.password).then(result => {
       return this.db.collection('users').doc(result.user.uid).set({
         username: user.username,
-        password: user.password,
-        email: user.email
+        usernameColor: "white",
       });
     })
+    
     .then((result) => {
       this.router.navigate(['/chat']);
     })

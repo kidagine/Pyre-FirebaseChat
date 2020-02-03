@@ -1,3 +1,4 @@
+//General
 *{
   margin: 0;
   padding: 0;
@@ -18,4 +19,38 @@ body{
 @font-face {
   font-family: whitney;
   src: url(assets/fonts/Whitney.otf) format("opentype");
+}
+
+
+//Loading Ring
+.loading-ring {
+  background-color: #2f3136;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 3px solid #e4007c;
+  border-color: #e4007c transparent #e4007c transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

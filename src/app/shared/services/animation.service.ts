@@ -3,9 +3,7 @@ import {
   transition,
   style,
   query,
-  group,
   animate,
-  keyframes
 } from '@angular/animations'
 
 export const fader = 
