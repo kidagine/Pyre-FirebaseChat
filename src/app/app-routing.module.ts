@@ -1,17 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './shared/auth.guard';
-import { ChatComponent } from './main/chat/chat.component';
-import { LoginComponent } from './main/login/login.component';
-import { RegisterComponent } from './main/register/register.component';
 import { ErrorComponent } from './main/error/error.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent,  },
-  { path: 'register', component: RegisterComponent, data: { animation: '' }},
-  { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
-  { path: '**', component: ErrorComponent }
+  {
+     path: 'admin',
+     loadChildren: () => import('./main/admin/admin.module').then(m => m.AdminModule)
+  },
+  { 
+    path: 'login',
+    loadChildren: () => import('./main/login/login.module').then(m => m.LoginModule)
+  },
+  { 
+    path: 'register',
+    loadChildren: () => import('./main/register/register.module').then(m => m.RegisterModule)
+  },
+  { 
+    path: 'chat',
+    loadChildren: () => import('./main/chat/chat.module').then(m => m.ChatModule)
+  },
+  { 
+    path: '**',
+    component: ErrorComponent
+  }
 ];
 
 @NgModule({

@@ -1,0 +1,15 @@
+<p>admin works!</p>
+<div class="users-column">
+  <h5 style="color: #8e9297">USERS— {{getUsersAmount()}}</h5>
+  <ul class="chat-list">
+    <li class="text" *ngFor="let user of users | async">
+      <br>
+      <p>        
+        <img src="https://ih1.redbubble.net/image.539340996.7218/flat,550x550,075,f.jpg" width="32" height="32">
+        <span class="userlist-container">
+          <span style="margin-left: 5%;" [ngStyle]="{'color': user.usernameColor}">{{user.username}}</span> <button (click)="deleteUser(user)">Delete</button>
+        </span>
+      <br>
+    </li>
+  </ul>    
+</div>

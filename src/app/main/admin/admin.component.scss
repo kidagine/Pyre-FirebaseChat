@@ -1,0 +1,19 @@
+//User Column
+.users-column {
+  float: left;
+  width: 15%;
+  padding: 10px;
+  height: 1080px;
+  background-color: #2f3136;
+  z-index: 9999;
+}
+.users-column span{
+  font-size: 17px;
+  color: #fff;
+}
+.userlist-container{
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  width: 205px;
+}

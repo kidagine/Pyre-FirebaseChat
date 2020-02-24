@@ -20,12 +20,17 @@ export class ChatComponent implements OnInit {
   user: User;
   message: Message;
   userAmount: String;
+  editUsername: String;
   previousUsername: String;
   previousPostTime: Date;
   usernameColor:String = "white";
 
   messageForm = new FormGroup({
     text: new FormControl('')
+  });
+  userForm = new FormGroup({
+    username: new FormControl(''),
+    usernameColor: new FormControl('')
   });
 
   constructor(private afs: AngularFirestore, private authenticationService: AuthenticationService) {
@@ -41,7 +46,7 @@ export class ChatComponent implements OnInit {
       }
       else{
         console.log("username doesn't exist");
-      }
+      } 
     })
   }
   ngOnInit() {
@@ -50,6 +55,7 @@ export class ChatComponent implements OnInit {
   sendMessage(message: Message){
     this.messageForm.reset();
     message.username = this.user.username;
+    message.usernameColor = this.user.usernameColor;
     var today = new Date();
     message.postTime = today;
     this.messageCollection.add(message);
@@ -76,8 +82,14 @@ export class ChatComponent implements OnInit {
     this.authenticationService.logOut();
   }
 
+  editUser(user: User){
+    console.log(user);
+    this.authenticationService.editUser(user);
+    this.user.username = user.username
+  }
+
   isPreviousUsernameEqual(currentUsername: String, setPrevious?: boolean){
-    if (this.previousUsername === currentUsername){
+    if (this.previousUsername === currentUsername || this.previousUsername === ""){
       if (setPrevious){
         this.previousUsername = currentUsername;
       }

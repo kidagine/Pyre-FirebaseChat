@@ -10,6 +10,13 @@
         <button (click)="logOut()">Log Out</button>
     </div>
   </div>
+  <div>
+    <form [formGroup]="userForm" (ngSubmit)="editUser(userForm.value)" autocomplete="on">
+      <input type="username" name="username" value="{{user.username}}" autocomplete="username" formControlName="username"/>
+      <input type="usernameColor" autocomplete="usernameColor" value={{user.usernameColor}}  formControlName="usernameColor"/>
+      <button type="submit">Login</button>
+    </form>
+  </div>
 </div>
 
   <div class="chat-column">
@@ -20,7 +27,7 @@
             <br>           
             <img src="https://ih1.redbubble.net/image.539340996.7218/flat,550x550,075,f.jpg" width="42" height="42">
             <div style="display: inline-block;overflow: hidden; width: 8px;"></div>
-            <span class="username" [ngStyle]="{'color': user.usernameColor}">{{message.username}}</span>
+            <span class="username" [ngStyle]="{'color': message.usernameColor}">{{message.username}}</span>
             <span class="post-time"> {{timeConverter(message.postTime)}} </span> 
             <br><div style="display: inline-block;overflow: hidden; width: 50px;"></div>{{message.text}}
           </span>

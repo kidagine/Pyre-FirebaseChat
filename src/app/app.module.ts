@@ -15,25 +15,36 @@ import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { ErrorComponent } from './main/error/error.component';
 import { AuthGuard } from './shared/auth.guard';
 import { AuthenticationService } from './shared/services/authentication.service';
+import { LoginModule } from './main/login/login.module';
+import { RegisterModule } from './main/register/register.module';
+import { ChatModule } from './main/chat/chat.module';
+import { AdminComponent } from './main/admin/admin.component';
+import { AdminModule } from './main/admin/admin.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AdminComponent,
     ChatComponent,
     LoginComponent,
     RegisterComponent,
-    ErrorComponent
+    ErrorComponent,
+    AdminComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireAuthGuardModule,
     BrowserModule,
+    AdminModule,
+    LoginModule,
+    RegisterModule,
+    ChatModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    AngularFirestoreModule,
-    AngularFireAuthModule,
     AppRoutingModule,
-    AngularFireAuthGuardModule
   ],
   providers: [
     AuthGuard,
