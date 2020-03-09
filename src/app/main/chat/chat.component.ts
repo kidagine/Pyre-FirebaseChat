@@ -5,6 +5,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { Message } from 'src/app/shared/models/message.model';
 import { User } from 'src/app/shared/models/user.model';
+import { MessageService } from 'src/app/shared/services/message.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 
 @Component({
@@ -13,7 +15,6 @@ import { User } from 'src/app/shared/models/user.model';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-  private messageCollection: AngularFirestoreCollection<Message>;
   private userCollection: AngularFirestoreCollection<User>;
   messages: Observable<Message[]>;
   users: Observable<User[]>;
@@ -33,11 +34,10 @@ export class ChatComponent implements OnInit {
     usernameColor: new FormControl('')
   });
 
-  constructor(private afs: AngularFirestore, private authenticationService: AuthenticationService) {
-    this.messageCollection = afs.collection<Message>('messages');
-    this.messages = this.afs.collection<Message>('messages', ref => ref.orderBy('postTime','asc')).valueChanges();
+  constructor(private afs: AngularFirestore, private authenticationService: AuthenticationService, private userService: UserService, private messageService: MessageService) {
     this.userCollection = afs.collection<User>('users');
-    this.users = this.afs.collection<User>('users', ref => ref.orderBy('username','asc')).valueChanges();
+    this.messages = messageService.getMessages();
+    this.users = userService.getUsers();
     this.getUsersAmount();
 
     this.userCollection.doc(this.authenticationService.getUserId()).ref.get().then((doc) => {
@@ -58,7 +58,7 @@ export class ChatComponent implements OnInit {
     message.usernameColor = this.user.usernameColor;
     var today = new Date();
     message.postTime = today;
-    this.messageCollection.add(message);
+    this.messageService.addMessage(message);
   }
 
   timeConverter(timestamp){
@@ -83,7 +83,6 @@ export class ChatComponent implements OnInit {
   }
 
   editUser(user: User){
-    console.log(user);
     this.authenticationService.editUser(user);
     this.user.username = user.username
   }
