@@ -4,10 +4,26 @@ import * as admin from 'firebase-admin'
 
 admin.initializeApp();
 
-exports.deleteUser =  functions.firestore
+exports.deleteAuthUser = functions.firestore
   .document('users/{userId}')
-  .onDelete((snap,context) => {
-    return admin.auth().deleteUser(snap.id)
-      .then(() => console.log('Deleted user with ID:' + snap.id))
-      .catch((error) => console.error('There was an error while deleting user:', error));
+  .onDelete(async (snap,context) => {
+    try {
+      await admin.auth().deleteUser(snap.id);
+      return console.log('Deleted user with ID:' + snap.id);
+    }
+    catch (error) {
+      return console.error('There was an error while deleting user:', error);
+    }
   });
+
+// exports.deleteDocUser = functions.auth
+// .user()
+// .onDelete(async (snap,context) => {
+//   try {
+//     await admin.auth().deleteUser(snap.id);
+//     return console.log('Deleted user with ID:' + snap.id);
+//   }
+//   catch (error) {
+//     return console.error('There was an error while deleting user:', error);
+//   }
+// });

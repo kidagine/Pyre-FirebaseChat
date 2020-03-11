@@ -83,7 +83,7 @@ export class ChatComponent implements OnInit {
   }
 
   editUser(user: User){
-    this.authenticationService.editUser(user);
+    this.userService.editUser(user);
     this.user.username = user.username
   }
 

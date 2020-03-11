@@ -14,7 +14,7 @@
     <form [formGroup]="userForm" (ngSubmit)="editUser(userForm.value)" autocomplete="on">
       <input type="username" name="username" value="{{user.username}}" autocomplete="username" formControlName="username"/>
       <input type="usernameColor" autocomplete="usernameColor" value={{user.usernameColor}}  formControlName="usernameColor"/>
-      <button type="submit">Login</button>
+      <button type="submit">Edit</button>
     </form>
   </div>
 </div>

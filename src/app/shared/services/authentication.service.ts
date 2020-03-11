@@ -72,32 +72,6 @@ export class AuthenticationService {
     }); 
   }
 
-  deleteUser(user: User){
-      this.db.collection("users").doc("COAzen513XeTvapS3rgz8IlMi0h2").delete().then(function() {
-        console.log("Documented deleted");
-    }).catch(function(error) {
-        console.error("Error removing ", error);
-    });
-  }
-
-  editUser(user: User) {
-    this.db.collection('users').doc(this.afAuth.auth.currentUser.uid).set({
-      username: user.username,
-      usernameColor: user.usernameColor
-    })
-  }
-
-  getLoggedInUsers(){
-    // this.afAuth.auth.onAuthStateChanged(function(user) {
-    //   if (user) {
-    //     console.log("signed");
-    //   }
-    //   else {
-    //     console.log("not signed")
-    //   }
-    // })
-  }
-
   getLoginErrorMessage(error: any){
     switch (error) {
       case 'auth/invalid-email' : {
