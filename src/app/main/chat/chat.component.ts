@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable, Timestamp, observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { FormGroup, FormControl } from '@angular/forms';
-import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { Message } from 'src/app/shared/models/message.model';
 import { User } from 'src/app/shared/models/user.model';
 import { MessageService } from 'src/app/shared/services/message.service';
@@ -34,13 +34,13 @@ export class ChatComponent implements OnInit {
     usernameColor: new FormControl('')
   });
 
-  constructor(private afs: AngularFirestore, private authenticationService: AuthenticationService, private userService: UserService, private messageService: MessageService) {
+  constructor(private afs: AngularFirestore, private authService: AuthService, private userService: UserService, private messageService: MessageService) {
     this.userCollection = afs.collection<User>('users');
     this.messages = messageService.getMessages();
     this.users = userService.getUsers();
     this.getUsersAmount();
 
-    this.userCollection.doc(this.authenticationService.getUserId()).ref.get().then((doc) => {
+    this.userCollection.doc(this.authService.getUserId()).ref.get().then((doc) => {
       if (doc.exists) {
         this.user = <User>doc.data();
       }
@@ -79,7 +79,7 @@ export class ChatComponent implements OnInit {
   }
 
   logOut(){
-    this.authenticationService.logOut();
+    this.authService.logOut();
   }
 
   editUser(user: User){

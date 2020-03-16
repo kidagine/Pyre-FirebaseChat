@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthenticationService } from '../../shared/services/authentication.service';
+import { FormGroup, FormControl } from '@angular/forms';
+import { AuthService } from '../../shared/services/auth.service';
 import { User } from 'src/app/shared/models/user.model';
 
 @Component({
@@ -19,12 +19,12 @@ export class RegisterComponent implements OnInit {
     password: new FormControl('')
   });
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authService: AuthService) {}
   ngOnInit() {
   }
 
   register(user: User) {
-    this.authenticationService.register(user);
+    this.authService.register(user);
   }
 
 }

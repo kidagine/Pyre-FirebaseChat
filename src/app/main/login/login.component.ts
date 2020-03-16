@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { User } from 'src/app/shared/models/user.model';
-import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 
 @Component({
@@ -16,16 +16,16 @@ export class LoginComponent implements OnInit {
     password: new FormControl('')
   });
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authService: AuthService) {}
   ngOnInit() {
   }
 
   login(user: User) {
-    this.authenticationService.login(user);
+    this.authService.login(user);
   }
 
   resetPassword(user: User){
-    this.authenticationService.resetPassword(user.email);
+    this.authService.resetPassword(user.email);
   }
 
 }

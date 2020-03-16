@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -13,7 +13,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class AdminComponent implements OnInit {
   users: Observable<User[]>;
 
-  constructor(private afs: AngularFirestore, private authenticationService: AuthenticationService, private userService: UserService) {
+  constructor(private afs: AngularFirestore, private authService: AuthService, private userService: UserService) {
     this.users = userService.getUsers();
     console.log(this.users);
   }

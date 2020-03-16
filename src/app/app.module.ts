@@ -12,14 +12,14 @@ import { RegisterComponent } from './main/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { ErrorComponent } from './main/error/error.component';
-import { AuthGuard } from './shared/auth.guard';
-import { AuthenticationService } from './shared/services/authentication.service';
+import { AuthService } from './shared/services/auth.service';
 import { LoginModule } from './main/login/login.module';
 import { RegisterModule } from './main/register/register.module';
 import { ChatModule } from './main/chat/chat.module';
 import { AdminComponent } from './main/admin/admin.component';
 import { AdminModule } from './main/admin/admin.module';
 import { environment } from '../environments/environment';
+import { AuthGuard } from './shared/services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,7 @@ import { environment } from '../environments/environment';
   ],
   providers: [
     AuthGuard,
-    AuthenticationService
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,8 +1,15 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin'
 
+const serviceAccount = require("../secret.json")
+
 
 admin.initializeApp();
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://pyre-d405b.firebaseapp.com"
+})
 
 exports.deleteAuthUser = functions.firestore
   .document('users/{userId}')

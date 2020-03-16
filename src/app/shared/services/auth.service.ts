@@ -8,7 +8,7 @@ import { User } from '../models/user.model';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
+export class AuthService {
 
   private eventAuthError = new BehaviorSubject<string>("");
   eventAuthError$ = this.eventAuthError.asObservable();
